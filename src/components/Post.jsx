@@ -6,6 +6,7 @@ import { Comment } from './Comment';
 
 import styles from './Post.module.css';
 import { useState } from 'react';
+import { CodepenLogo } from 'phosphor-react';
 
 
 export function Post({ author, publishedAt, content }) {
@@ -34,6 +35,14 @@ export function Post({ author, publishedAt, content }) {
 
   function handleNewCommentChange() {
     setNewCommentText(event.target.value);
+  }
+
+  function deleteComment(commentToDelete) {
+    const commentsWithoutDeleteOne = comments.filter(comment => {
+      return comment !== commentToDelete;
+    });
+    
+    setComments(commentsWithoutDeleteOne);
   }
 
   return(
@@ -80,7 +89,13 @@ export function Post({ author, publishedAt, content }) {
 
       <div className={styles.commentList}>
         {comments.map(comment => {
-          return <Comment key={comment} content={comment} />
+          return (
+            <Comment 
+              key={comment} 
+              content={comment} 
+              onDeleteComment={deleteComment} 
+            />
+          )
         })}
       </div>
     </article>
