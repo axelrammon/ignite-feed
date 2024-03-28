@@ -8,8 +8,6 @@ export function Comment({ content, onDeleteComment }) {
   const [likeCount, setLikeCount] = useState(0);
 
   function handleDeleteComment() {
-    // console.log("deletar");
-
     onDeleteComment(content);
   }
 
